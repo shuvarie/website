@@ -26,18 +26,25 @@ providers {
     provider id="67e55044-10b1-426f-9247-bb680e5fe0c8" name="OpenAI" {
         kind "openai"           // transport, see below
         catalog "ollama-cloud"  // optional: catalog id for model metadata
-        api-key "sk-..."        // required unless local
+        api-key "sk-..."        // required unless local or OAuth (chatgpt, copilot)
         base-url "https://..."  // optional: overrides the catalog endpoint
     }
 }
 ```
 
 Valid `kind` values: `openai`, `openai-compat`, `openrouter`, `vercel`,
-`anthropic`, `google`, `azure`, `bedrock`, `google-vertex`, `ollama`.
+`anthropic`, `google`, `azure`, `bedrock`, `google-vertex`, `ollama`,
+`chatgpt`, `copilot`.
 Notes:
 
 - An API key is required unless the provider is local (`ollama` needs none;
   it defaults to `http://localhost:11434`) or its catalog entry is keyless.
+- `chatgpt` and `copilot` use **OAuth device sign-in** instead of API keys:
+  omit `api-key`, and submitting the add-provider wizard opens a popup with
+  a verification URL and code (<kbd>o</kbd>/<kbd>Enter</kbd> opens the
+  browser, <kbd>y</kbd> copies the URL, <kbd>c</kbd> copies the code;
+  dismissing the popup doesn't cancel the sign-in). Tokens are cached on
+  disk and refreshed automatically. Other kinds must configure an API key.
 - `api-key` and `base-url` values expand `$VAR` / `${VAR}` from the
   environment.
 
@@ -50,8 +57,8 @@ sources — or refresh at startup with `remote-first #true` (5 s timeout).
 ```kdl
 registries {
     selune {
-        disabled #false
         remote-first #false
+        // disabled         // bare switch: present = registry off
     }
 }
 ```
@@ -63,9 +70,9 @@ Embeddings power session search. Default per provider: `ollama` ⇒
 
 ```kdl
 embedding {
-    disabled #false
     provider "ollama"
     model "nomic-embed-text"
     dimensions 768
+    // disabled         // bare switch: present = embeddings off
 }
 ```

@@ -10,13 +10,13 @@ permalink: /docs/usage/cli/
 
 | Invocation | Meaning |
 | ------------ | --------- |
-| `shuvarie` | Start a new session in the current directory |
+| `shuvarie [WORK_DIR]` | Start a new session (optionally in another directory — the session database lives there too) |
 | `-c`, `--current` | Resume the most recently updated session |
 | `-s`, `--session <UUID>` | Resume a specific session by UUID |
-| `-d`, `--dir <DIR>` | Run in another directory (the session database lives there too) |
 | `--config <FILE>` | Use an explicit config file, bypassing the workspace-config trust scan |
-| `--export-session [FILE]` | Export a session to JSON and exit |
-| `--import-session <FILE>` | Import a session JSON snapshot and exit |
+| `shuvarie import <FILE>` | Import a session JSON snapshot and exit |
+| `shuvarie export [DEST]` | Export a session to JSON and exit (`-s` picks the session, default the most recent; an empty `DEST` picks an automatic path) |
+| `shuvarie update` | Update the binary to the latest release |
 | `-h`, `--help` | Show help |
 | `-V`, `--version` | Show version |
 
@@ -27,6 +27,13 @@ This session can be reopened with:
 
   shuvarie -s <session-uuid>
 ```
+
+## Updating
+
+`shuvarie update` fetches the latest GitHub release, verifies the download
+against the release's `SHA256SUMS` and swaps the binary in place — picking
+the right build for your platform, including musl. When it finishes,
+restart `shuvarie` to use the new version.
 
 ## The prompt
 

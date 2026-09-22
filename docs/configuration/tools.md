@@ -8,25 +8,81 @@ permalink: /docs/configuration/tools/
 
 ## tools
 
-The `web-search` tool (exposed to the model as `web_search`) is off until
-you point it at a search endpoint:
+The `web-search` tool (exposed to the model as `web_search`) works out of
+the box: the default backend is **DuckDuckGo Lite**, a JavaScript-free
+results page read with the `to_markdown` response kind — no API key needed.
+Point it at your own endpoint with the `url` + `type` pair (both or neither:
+`url` alone is an error), or switch it off with `disabled`:
 
 ```kdl
 tools {
     web-search {
-        enabled #true
-        url "https://example.com/search"  // required, must start with http(s)://
-        type "ollama"                     // or "to_markdown" (fetch page → markdown)
+        // disabled                               // bare switch: present = tool removed
+        url "https://ollama.com/api/web_search"   // required together with type
+        type "ollama"                             // or "to_markdown" (fetch page → markdown)
         headers { Authorization "Bearer $MY_TOKEN" }  // $VAR / ${VAR} expand from the environment
         params type="body-json" {         // or type="query" for GET parameters
-            query as="q"                  // tool argument → remote parameter name
+            query as="query"              // tool argument → remote parameter name
         }
     }
 }
 ```
 
 Default `params` when omitted: `ollama` ⇒ POST body with `query as="query"`;
-`to_markdown` ⇒ GET query with `query as="q"`.
+`to_markdown` ⇒ GET query with `query as="q"` (the DuckDuckGo default).
+
+## Custom stdio tools
+
+`tool name="…"` defines your own tool: every call spawns a fresh process
+running `cmd`, with `{{param}}` placeholders in the argv replaced by the
+call's arguments. The `params` you declare form the tool's JSON input
+schema; `input "json"` additionally pipes the resolved arguments to the
+child's stdin; `envs` (values may expand `$VAR`) and `timeout` (seconds, at
+least 1) round it off. Names starting with `mcp__` are reserved:
+
+```kdl
+tools {
+    tool name="deploy" {
+        description "Deploy the current branch"
+        cmd "./scripts/deploy.sh" "{{target}}"
+        params {
+            param "target" type="string" required=#true description="Where to deploy"
+        }
+        envs { env "DEPLOY_TOKEN" "$DEPLOY_TOKEN" }  // inherit=#true by default
+        timeout 120
+    }
+}
+```
+
+## MCP servers
+
+`mcp` connects [Model Context Protocol](https://modelcontextprotocol.io)
+servers over stdio (a spawned child process) or streamable HTTP. Server
+names are unique across both transports, and every tool a server exposes
+becomes an agent tool named `mcp__<server>__<tool>`:
+
+```kdl
+tools {
+    mcp {
+        stdio name="github" {
+            command "npx"
+            args "-y" "@modelcontextprotocol/server-github"
+            envs { env "GITHUB_TOKEN" "$GITHUB_TOKEN" }  // inherit=#true by default
+        }
+        http name="remote" {
+            url "https://mcp.example.com/mcp"
+            headers { Authorization "Bearer $MCP_TOKEN" }  // values expand $VAR
+        }
+    }
+}
+```
+
+Servers connect lazily, and their tools are gated like the stdio tools:
+every call asks in the TUI by default (grantable by name for the session —
+see [permissions](/docs/configuration/permissions/)).
+[`/mcp`](/docs/usage/commands/) lists server states,
+`/mcp-reconnect <server>` reconnects one, and the sidebar marks each server
+✓ / ○ / ✗.
 
 ## shell
 
@@ -40,7 +96,7 @@ shell {
 
 ```kdl
 lsp {
-    disabled #false
+    disabled            // bare switch: present = LSP tools off
     servers {
         rust {
             command "rust-analyzer" "..."   // language server command

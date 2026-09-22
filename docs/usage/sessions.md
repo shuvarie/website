@@ -7,20 +7,25 @@ permalink: /docs/usage/sessions/
 ---
 
 Sessions live in an embedded SQLite database at `<project>/.shuvarie/`
-(auto-gitignored; `--dir` relocates it). A session is created by your first
-prompt — titled from it — and every message, tool call and scroll position
-is persisted immediately, so killing the terminal loses nothing.
+(auto-gitignored; the `WORK_DIR` argument relocates it). A session is
+created by your first prompt — titled from it — and every message, tool
+call and scroll position is persisted immediately, so killing the terminal
+loses nothing.
 
 - **Resume** with `shuvarie -c`, `shuvarie -s <UUID>`, or `/sessions`
   (<kbd>Enter</kbd> resume, <kbd>N</kbd> new, <kbd>Ctrl+D</kbd> delete with
   confirmation).
+- **Titles.** New sessions are titled from the first prompt. `/title`
+  renames them, [`/gen-title`](/docs/usage/commands/) drafts one with the
+  LLM, and `ui { title { auto-gen } }` drafts automatically — see
+  [Interface](/docs/configuration/ui/).
 - **One knight per horse**: a session locks while it is open elsewhere, and
   the picker marks it *in use*.
 - **History is a tree.** `/undo` forks before the last prompt, `/replay`
   forks and re-runs it, and `/tree` walks the whole tree — <kbd>Enter</kbd>
   forks from a node, `s` summarizes the forked-away prefix, `d` deletes a
   branch (confirmed). Files on disk are never reverted.
-- **Export / import.** `/export [path]` (or `--export-session [FILE]`)
-  writes a self-contained JSON snapshot; `--import-session <FILE>` restores
+- **Export / import.** `/export [path]` (or `shuvarie export [DEST]`)
+  writes a self-contained JSON snapshot; `shuvarie import <FILE>` restores
   one. [Embeddings](/docs/configuration/providers/) are regenerated on
   import.

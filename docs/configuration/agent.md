@@ -22,9 +22,9 @@ Retries back off on a ladder: 3 s, 5 s, 10 s, 20 s, 30 s, 60 s, …
 
 ## context
 
-Context-window management (enabled by default; `disabled #true` to turn it
-off). One shared input-token budget drives trimming, the overflow guard and
-compaction:
+Context-window management (enabled by default; the bare `disabled` switch
+turns it off). One shared input-token budget drives trimming, the overflow
+guard and compaction:
 
 ```kdl
 context {

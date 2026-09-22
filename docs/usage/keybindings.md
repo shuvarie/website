@@ -43,4 +43,5 @@ walks back down.
 Drag with the left button to select text in the input or chat. Enable
 `copy-on-select` in the [`ui`](/docs/configuration/ui/) config to copy
 automatically. The footer row shows the keys that apply to whatever is on
-screen.
+screen, and the sidebar and collapsed footer show the workspace's current
+git branch (⎇ …), refreshed at the start of every turn.

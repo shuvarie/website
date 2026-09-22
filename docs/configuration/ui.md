@@ -15,6 +15,31 @@ permalink: /docs/configuration/ui/
 | `copy-on-select` | `#false` | Copy text automatically when selected with the mouse |
 | `theme` | built-in Faerun | Name of a theme from `themes`/`themes.d` |
 
+## title
+
+Inside `ui`. A new session is titled from its first prompt, capped at
+`max-chars` (default 30). The `auto-gen` switch drafts the title with an LLM
+right after the first prompt instead; the optional `llm` block carries the
+settings for those calls (`provider` defaults to the active connection,
+`model` to the provider's default small model, `system-prompt` to a built-in
+prompt). [`/gen-title`](/docs/usage/commands/) re-drafts on demand, and an
+explicit [`/title`](/docs/usage/commands/) rename wins over a draft:
+
+```kdl
+ui {
+    title max-chars=30 {
+        auto-gen
+        llm {
+            provider "Openai"
+            model "gpt-5.6-luna"
+            system-prompt """
+            You name sessions briefly.
+            """
+        }
+    }
+}
+```
+
 ## themes
 
 Shuvarie ships with **Faerun** (dark, the default) and its light variant.

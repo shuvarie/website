@@ -35,6 +35,8 @@ declaration order, then the scope fallback (`paths`/`shell-patterns`
 also watch command *output* and cut the turn when they match. Scenes can
 tighten this further per-tool (`tools { ask-all }`) — see
 [scenes](/docs/configuration/scenes/).
+Custom stdio tools and MCP tools (`mcp__<server>__<tool>`) ask for every
+call by default; a grant can be remembered by name for the session.
 
 The Shuvarie repository itself
 uses one: [`shuvarie.kdl`](https://github.com/shuvarie/shuvarie) in its

@@ -15,6 +15,7 @@ permalink: /docs/configuration/files/
 | Explicit config | `--config <FILE>` | Loads exactly this file; a missing file is an error |
 | Connections | `~/.config/shuvarie/connections.kdl` | Providers and API keys — keep it private |
 | Trust records | `~/.config/shuvarie/trusts.kdl` | Written by the trust prompt |
+| Custom commands | `commands/<name>/command.md` in the workspace `.shuvarie/` dir or the global config dir | One directory per command; workspace copies win — see [Slash commands](/docs/usage/commands/) |
 | Drop-in dirs | `scene.d/`, `themes.d/` next to each config level | Every sorted `*.kdl` file is loaded; broken files are skipped with a warning |
 
 ## Precedence
@@ -37,3 +38,7 @@ covered on a subsection page: [Interface](/docs/configuration/ui/),
 [Providers & models](/docs/configuration/providers/),
 [Scenes](/docs/configuration/scenes/) and
 [Permissions](/docs/configuration/permissions/).
+
+`disabled` nodes are bare switches everywhere: they take no arguments, and
+their presence alone turns the section off (the old `disabled #true` form is
+an error).

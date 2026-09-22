@@ -12,12 +12,13 @@ defaults.
 
 - [Configuration files](/docs/configuration/files/) — where they live and
   how the layers combine
-- [Interface & themes](/docs/configuration/ui/) — `ui` and `themes`
+- [Interface & themes](/docs/configuration/ui/) — `ui`, `title` and
+  `themes`
 - [Agent & context](/docs/configuration/agent/) — `agent`, `retry`,
   `context`
 - [Skills](/docs/configuration/skills/) — reusable prompts and procedures
-- [Tools & integrations](/docs/configuration/tools/) — `tools`, `shell`,
-  `lsp`
+- [Tools & integrations](/docs/configuration/tools/) — `tools` (web
+  search, custom stdio tools, MCP servers), `shell`, `lsp`
 - [Providers & models](/docs/configuration/providers/) —
   `connections.kdl`, `registries`, `embedding`
 - [Scenes](/docs/configuration/scenes/) — mission profiles for the agent
