@@ -2,7 +2,7 @@
 layout: page
 title: Providers & models
 parent: Configuration
-nav_order: 6
+nav_order: 7
 permalink: /docs/configuration/providers/
 ---
 
@@ -48,20 +48,77 @@ Notes:
 - `api-key` and `base-url` values expand `$VAR` / `${VAR}` from the
   environment.
 
+## decision-providers
+
+Decision models (see [Decisions](/docs/configuration/decisions/)) do **not**
+ride the completion path: they use their own `decision-providers` block and
+an active `decision` selection in the same `connections.kdl`. The only wire
+protocol today is `systemone` (TypeSafe's System One API, which Ollama's Clef
+models and Cloudflare also serve):
+
+```kdl
+decision-providers {
+    provider "ollama" {          // name used to reference the connection
+        type "systemone"
+        base-url "http://localhost:11434"   // host root gains /v1/systemone; a full URL is used as-is
+        api-key "…"              // optional: local servers ignore authentication
+    }
+}
+
+decision {
+    provider "ollama"            // both children are required
+    model "clef"                 // free text — decision models are not enumerable
+}
+```
+
+[`/decision-provider`](/docs/usage/commands/) opens the dialog that writes
+both blocks (name, endpoint, optional key, free-text model).
+
+## default-providers
+
+When a prompt names a model as `<provider_kind>/<model>` (for example a
+custom command's `model:` frontmatter), `default-providers` says which
+connection to use for each connection type:
+
+```kdl
+default-providers {
+    use id="67e55044-10b1-426f-9247-bb680e5fe0c8"
+}
+```
+
 ## registries
 
 The built-in model/provider registry is `selune`. Popups fetch catalog data
 on demand — press <kbd>Ctrl+O</kbd> to toggle between offline and hosted
-sources — or refresh at startup with `remote-first #true` (5 s timeout).
+sources — or refresh at startup with `remote-first #true` (5 s timeout):
 
 ```kdl
 registries {
     selune {
         remote-first #false
-        // disabled         // bare switch: present = registry off
+        // disabled #true   // add #true to switch the registry off
     }
 }
 ```
+
+Add your own registry with a `registry` block — an offline snapshot
+(`path`) and/or a remote source (`url`), plus optional request `headers`.
+`name` is required and must not be `selune` (it is always defined):
+
+```kdl
+registries {
+    registry {
+        name "internal"
+        url "https://registry.example.com/catalog.json"
+        path "~/.cache/shuvarie/internal.json"   // optional offline snapshot
+        headers { Authorization "Bearer $REGISTRY_TOKEN" }
+        // disabled #true
+        remote-first #false
+    }
+}
+```
+
+`registries` merges key-by-key across config layers.
 
 ## embedding
 
@@ -73,6 +130,6 @@ embedding {
     provider "ollama"
     model "nomic-embed-text"
     dimensions 768
-    // disabled         // bare switch: present = embeddings off
+    // disabled #true   // add #true to switch embeddings off
 }
 ```

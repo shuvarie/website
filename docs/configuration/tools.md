@@ -12,12 +12,12 @@ The `web-search` tool (exposed to the model as `web_search`) works out of
 the box: the default backend is **DuckDuckGo Lite**, a JavaScript-free
 results page read with the `to_markdown` response kind — no API key needed.
 Point it at your own endpoint with the `url` + `type` pair (both or neither:
-`url` alone is an error), or switch it off with `disabled`:
+`url` alone is an error), or switch it off with `disabled #true`:
 
 ```kdl
 tools {
     web-search {
-        // disabled                               // bare switch: present = tool removed
+        // disabled                               // add #true to remove the tool
         url "https://ollama.com/api/web_search"   // required together with type
         type "ollama"                             // or "to_markdown" (fetch page → markdown)
         headers { Authorization "Bearer $MY_TOKEN" }  // $VAR / ${VAR} expand from the environment
@@ -30,6 +30,9 @@ tools {
 
 Default `params` when omitted: `ollama` ⇒ POST body with `query as="query"`;
 `to_markdown` ⇒ GET query with `query as="q"` (the DuckDuckGo default).
+
+`read_file` reads documents and images too — see
+[Attachments](/docs/configuration/attachments/) for the formats and limits.
 
 ## Custom stdio tools
 
@@ -96,7 +99,7 @@ shell {
 
 ```kdl
 lsp {
-    disabled            // bare switch: present = LSP tools off
+    disabled #true      // add #true to switch the LSP tools off (bare form is a no-op)
     servers {
         rust {
             command "rust-analyzer" "..."   // language server command

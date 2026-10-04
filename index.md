@@ -46,13 +46,21 @@ decision — all under explicit, granular permissions you control.
   </div>
   <div class="feature">
     <h3>🎨 Scenes &amp; themes</h3>
-    <p>Drop-in <code>scene.d</code> and <code>themes.d</code> files change how
-    Shuvarie looks and behaves; switch live with <code>/scene</code>.</p>
+    <p>Built-in <strong>Advisor</strong>, <strong>Reviewer</strong> and
+    <strong>Orchestrator</strong> scenes, plus five theme families. Drop in
+    <code>scene.d</code> and <code>themes.d</code> files, switch live with
+    <code>/scene</code>.</p>
+  </div>
+  <div class="feature">
+    <h3>📎 Attachments</h3>
+    <p>Type <code>@path</code> to attach documents (pdf, docx, xlsx, epub,
+    …) or images; the model reads them through <code>read_file</code>.</p>
   </div>
   <div class="feature">
     <h3>🛡️ Permissions &amp; trust</h3>
     <p>A workspace trust prompt on first run, plus a granular allow/deny
-    <code>permissions</code> section — the agent never acts unbound.</p>
+    <code>permissions</code> section — optionally backed by decision
+    models. The agent never acts unbound.</p>
   </div>
   <div class="feature">
     <h3>⌨️ Keyboard-first</h3>

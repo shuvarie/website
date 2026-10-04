@@ -13,7 +13,20 @@ permalink: /docs/configuration/ui/
 | `frame-rate` | `60` | TUI frame-rate cap; `0` uncapped |
 | `sidebar` | `auto` | `auto` (expanded when the terminal is ≥ 80 cols), `expanded` or `collapsed` |
 | `copy-on-select` | `#false` | Copy text automatically when selected with the mouse |
-| `theme` | built-in Faerun | Name of a theme from `themes`/`themes.d` |
+| `theme` | `Faerun` | Name of a built-in or configured theme |
+
+## image
+
+Inside `ui`. Controls how attached images and previews are painted:
+
+```kdl
+ui {
+    image {
+        protocol "kitty"    // halfblocks | kitty | sixel | iterm2 (default: auto-detect)
+        cell-size 10 20     // two pixel sizes (width, height), for image scaling
+    }
+}
+```
 
 ## title
 
@@ -40,12 +53,27 @@ ui {
 }
 ```
 
+`auto-gen` is a bare switch: its presence alone turns it on.
+
 ## themes
 
-Shuvarie ships with **Faerun** (dark, the default) and its light variant.
-Set one with `ui { theme "Name" }`; when a name has both variants, the one
-matching the terminal's mode is chosen. Define themes in `themes { … }` or
-drop files into `themes.d/`; unset roles keep their Faerun values:
+Shuvarie ships with five theme families, each with a variant per terminal
+mode. `ui { theme "Name" }` picks one; when the name has both a dark and a
+light variant, the one matching the terminal's background is chosen.
+
+| Family | Variants |
+| -------- | ---------- |
+| **Faerun** | base (dark, the default), `light` |
+| **Tokyo Night** | `night` (base), `storm` (dark), `day` (light) |
+| **Kanagawa** | `wave` (base), `dragon` (dark), `lotus` (light) |
+| **Ayu** | `dark` (base), `light` |
+| **One** | `dark` (base), `light` |
+
+[`/theme`](/docs/usage/commands/) picks a theme live with a preview. Define
+your own in `themes { … }` or drop files into `themes.d/`; unset roles keep
+their Faerun values. A `theme` node takes a `name` property, an optional
+`variant` (part of the definition's key) and a `mode` (`dark` or `light`,
+default `dark`) that auto-detection reads:
 
 ```kdl
 themes {
@@ -64,4 +92,5 @@ Colors accept `#rgb`, `#rrggbb` or bare `rrggbb`. Available roles: `bg`,
 `surface`, `surface-focused`, `overlay`, `accent`, `accent-bg`, `selection`,
 `text`, `text-dim`, `text-muted`, `prompt-bg`, `running-bg`, `success-bg`,
 `warning-bg`, `error-bg`, `diff-add-bg`, `diff-add-emph-bg`, `diff-del-bg`,
-`diff-del-emph-bg`, `success`, `warning`, `error`.
+`diff-del-emph-bg`, `success`, `warning`, `error`, and the code-renderer
+roles `code-keyword`, `code-string`, `code-type`, `code-function`.

@@ -47,3 +47,6 @@ restart `shuvarie` to use the new version.
   appears as you type.
 - `/skill:<name> [args]` expands a
   [skill](/docs/configuration/skills/) into its stored prompt and sends it.
+- Type `@path` to attach a document or image (see
+  [Attachments](/docs/configuration/attachments/)); a completion popup
+  offers matching paths as you type.

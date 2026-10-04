@@ -11,7 +11,7 @@ adds extra search directories:
 
 ```kdl
 skills {
-    disabled            // bare switch: present = skills off (takes no arguments)
+    disabled #true      // presence + #true = skills off (bare form is a no-op)
     dirs "~/my-skills"  // extra skill directories
 }
 ```
