@@ -50,11 +50,16 @@ cargo install --path .
 `cd` into a project directory and run `shuvarie`. Two things happen the
 first time:
 
-1. **Provider setup.** With no LLM provider configured, Shuvarie opens a
-   welcome screen. Press <kbd>Enter</kbd> to open the add-provider form —
-   pick a provider kind, give it a name, and paste an API key (local Ollama
-   needs none). This is written to
-   `~/.config/shuvarie/connections.kdl`.
+1. **Provider setup.** With no LLM provider configured, Shuvarie takes over
+   the screen with the welcome flow: an animated title page, the
+   add-provider form, a model picker for the provider you just added, and a
+   closing *all set* page. On the title page any key moves on (so
+   <kbd>Enter</kbd> opens the form); on the closing page any key hands the
+   terminal to the session. Pick a provider kind, give it a name, and paste
+   an API key (local Ollama needs none) — until a provider is configured
+   there is no way into a session. The result is written to
+   `~/.config/shuvarie/connections.kdl`. <kbd>Ctrl+C</kbd> asks to quit from
+   every page.
 2. **Workspace trust.** Shuvarie scans the project for agent instructions
    (`AGENTS.md`, `CLAUDE.md`), skills and config files, and asks what it may
    load. Confirm with <kbd>Enter</kbd>, or trim the checkboxes with

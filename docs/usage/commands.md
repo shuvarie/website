@@ -14,6 +14,7 @@ permalink: /docs/usage/commands/
 | `/sessions` | Switch session | Resume or delete past sessions |
 | `/new` | New session | Start a fresh conversation |
 | `/tree` | Session tree | Walk the tree, fork from a node |
+| `/todo` | Todos | Show the session todo list in a read-only popup |
 | `/scene` | Switch scene | Pick the scene the agent runs under (`/scene <name>`) |
 | `/variant` | Select variant | Pick the model's reasoning effort (`/variant HIGH`) |
 | `/theme` | Theme | Pick the TUI theme, with live previews (`/theme <name>`) |
@@ -30,6 +31,7 @@ permalink: /docs/usage/commands/
 | `/search` | Search chat | Highlight text in the chat live (`/search <text>`) |
 | `/assisted-by` | Assisted by | Show the session's `Assisted-By:` trailer; <kbd>Enter</kbd> copies it |
 | `/images` | View images | Browse the session's attached images in a gallery |
+| `/screensaver` | Screensaver | Play the welcome animation fullscreen; any key dismisses it |
 | `/quit` | Quit | Exit the program |
 
 Some commands only appear when they apply: `/undo` and `/replay` need
@@ -37,6 +39,14 @@ messages in the chat; `/compact` needs messages and no reply streaming;
 `/tree`, `/title`, `/gen-title` and `/export` need an active session
 (`/gen-title` also needs a first prompt); `/scene` is hidden while a reply
 is streaming; and `/images` appears once the session has images.
+
+`/todo` opens a read-only popup of the list the agent keeps for the session
+with its `todo` tool (see [Tools](/docs/configuration/tools/#todo)); running
+it again takes a fresh snapshot. <kbd>↑</kbd>/<kbd>↓</kbd> or `j`/`k` walk
+the list, <kbd>Home</kbd>/`g` and <kbd>End</kbd>/`G` jump to the ends, and
+<kbd>Esc</kbd> or `q` closes it. `/screensaver` plays the onboarding
+animation fullscreen over a live session until a key is pressed
+(<kbd>Ctrl+C</kbd> still asks to quit).
 
 <kbd>Ctrl+M</kbd> opens the same commands as a searchable menu.
 

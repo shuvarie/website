@@ -10,7 +10,7 @@ Run `shuvarie` in a project directory. The first prompt you send starts a
 session; everything after that is keyboard-first.
 
 - [Command line & the prompt](/docs/usage/cli/) — starting `shuvarie`, its
-  flags, and how the input line works
+  flags, headless `run`, and how the input line works
 - [Slash commands](/docs/usage/commands/) — every `/command`, and when each
   one appears
 - [Keybindings](/docs/usage/keybindings/) — global, editing, streaming and

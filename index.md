@@ -67,6 +67,12 @@ decision — all under explicit, granular permissions you control.
     <p>Every action has a keybinding, and <code>Ctrl+M</code> puts every
     command one keystroke away.</p>
   </div>
+  <div class="feature">
+    <h3>🖥️ Headless mode</h3>
+    <p><code>shuvarie run "…"</code> drives the agent without the TUI,
+    streaming the reply to stdout and the tool log to stderr — the same
+    config, permissions and sessions.</p>
+  </div>
 </div>
 
 ## Try it

@@ -34,6 +34,17 @@ Default `params` when omitted: `ollama` ⇒ POST body with `query as="query"`;
 `read_file` reads documents and images too — see
 [Attachments](/docs/configuration/attachments/) for the formats and limits.
 
+## todo
+
+The `todo` tool is the agent's own scratchpad for a session: it adds,
+updates, removes and lists items (`pending`, `in_progress`, `done`), and the
+list is shown in the sidebar as a done/total tally (once the list is
+non-empty) and in the [`/todo`](/docs/usage/commands/) popup. The list is
+*derived* state — it is never stored on its own, but replayed from the
+session's `todo` tool calls, so undo, reload and resume all land on the
+right list. Scenes can drop the tool with `tool "todo" { disabled #true }`
+like any other.
+
 ## Custom stdio tools
 
 `tool name="…"` defines your own tool: every call spawns a fresh process
