@@ -24,6 +24,14 @@ loses nothing.
   [Interface](/docs/configuration/ui/).
 - **One knight per horse**: a session locks while it is open elsewhere, and
   the picker marks it *in use*.
+- **Failures are resumed, not replayed.** A turn cut by an error keeps what
+  it already produced — the partial reply and every tool call that returned —
+  on the session's active path, and the [retry](/docs/configuration/agent/)
+  continues from there: the tool calls it still needs are re-issued, the
+  prompt is not sent again as a new request, and the retried reply fills in
+  the same turn. An interrupted turn (<kbd>Esc</kbd> <kbd>Esc</kbd>) keeps
+  its partial reply and finished tool calls too, so resuming the session
+  carries on with the work that was done rather than from the prompt.
 - **History is a tree.** `/undo` forks before the last prompt, `/replay`
   forks and re-runs it, and `/tree` walks the whole tree — <kbd>Enter</kbd>
   forks from a node, `s` summarizes the forked-away prefix, `d` deletes a
@@ -36,4 +44,7 @@ loses nothing.
   one. [Embeddings](/docs/configuration/providers/) are regenerated on
   import.
 - **Assisted-By.** `/assisted-by` shows the models that served the session
-  as an `Assisted-By:` trailer; <kbd>Enter</kbd> copies it.
+  as an `Assisted-By:` trailer — the catalog's `org/model` codes, or the
+  configured id for a model the catalog does not know, in first-use order
+  with the first non-default scene that used each one;
+  <kbd>Enter</kbd> copies it.

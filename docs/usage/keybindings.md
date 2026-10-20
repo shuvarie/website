@@ -77,6 +77,8 @@ see [`ui.notify`](/docs/configuration/ui/#notify).
 | Permission ask | <kbd>Enter</kbd>/`y`/`a` allow, `s` allow for the session, `d` allow everything in the asked file's directory for the session (path asks only), <kbd>Esc</kbd>/`n` deny |
 | Question | <kbd>↑</kbd>/<kbd>↓</kbd> move, <kbd>←</kbd>/<kbd>→</kbd>/<kbd>Tab</kbd> switch question, <kbd>Enter</kbd> toggle an option, `1`–`9` pick one, <kbd>Esc</kbd> dismiss — mid-stream it also interrupts the turn |
 | Todo list | <kbd>↑</kbd>/<kbd>↓</kbd> or `j`/`k` move, <kbd>Home</kbd>/`g` and <kbd>End</kbd>/`G` jump to the ends, <kbd>Esc</kbd>/`q` close |
+| Peak table | `t` switch the time columns between the schedule's zone, UTC and local time, <kbd>Esc</kbd>/`q` close |
+| Codemode overlay | <kbd>↑</kbd>/<kbd>↓</kbd> (<kbd>Ctrl+P</kbd>/<kbd>Ctrl+N</kbd>) walk, <kbd>Enter</kbd>/<kbd>Space</kbd> change a switch, <kbd>Esc</kbd> close |
 | Invalid slash command | <kbd>Enter</kbd> send the held text anyway, <kbd>Esc</kbd> hand it back to the composer |
 | Command menu | <kbd>↑</kbd>/<kbd>↓</kbd> navigate, <kbd>Enter</kbd> run, <kbd>Esc</kbd> close |
 | Slash-command menu | <kbd>Tab</kbd> complete, <kbd>↑</kbd>/<kbd>↓</kbd> select, <kbd>Enter</kbd> run, <kbd>Esc</kbd> dismiss |

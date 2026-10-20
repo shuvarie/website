@@ -36,12 +36,13 @@ an error.
 ## Accepted sections
 
 `ui`, `db`, `embedding`, `agent`, `attachments`, `lsp`, `skills`,
-`default-providers`, `context`, `shell`, `registries`, `tools`,
+`default-providers`, `context`, `shell`, `registries`, `tools`, `codemode`,
 `permissions`, `decisions`, `ranking`, `scenes`, `themes`, `retry` — each is
 covered on a subsection page: [Interface](/docs/configuration/ui/),
 [Agent & context](/docs/configuration/agent/),
 [Skills](/docs/configuration/skills/),
 [Tools & integrations](/docs/configuration/tools/),
+[Codemode](/docs/configuration/codemode/),
 [Attachments](/docs/configuration/attachments/),
 [Providers & models](/docs/configuration/providers/),
 [Scenes](/docs/configuration/scenes/),

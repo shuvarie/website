@@ -19,6 +19,8 @@ defaults.
 - [Skills](/docs/configuration/skills/) — reusable prompts and procedures
 - [Tools & integrations](/docs/configuration/tools/) — `tools` (web
   search, custom stdio tools, MCP servers), `shell`, `lsp`
+- [Codemode](/docs/configuration/codemode/) — the Rhai scripting tool, the
+  roster split modes, and its limits
 - [Attachments](/docs/configuration/attachments/) — documents, images and
   the office converter
 - [Providers & models](/docs/configuration/providers/) —

@@ -2,7 +2,7 @@
 layout: page
 title: Scenes
 parent: Configuration
-nav_order: 8
+nav_order: 9
 permalink: /docs/configuration/scenes/
 ---
 

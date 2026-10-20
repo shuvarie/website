@@ -20,6 +20,13 @@ retry {
 
 Retries back off on a ladder: 3 s, 5 s, 10 s, 20 s, 30 s, 60 s, …
 
+A retry **resumes the turn** instead of replaying it. The failed attempt's
+partial reply and the tool calls that already returned ride the retried
+request, so the model carries on with the work it had done and re-issues only
+what it still needs — the prompt is not sent again as a fresh request, and
+the reply lands on the same turn rather than under a second, half-finished
+one. See [Sessions](/docs/usage/sessions/).
+
 ## context
 
 Context-window management (enabled by default; `disabled #true` turns it

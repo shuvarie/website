@@ -18,6 +18,8 @@ permalink: /docs/usage/commands/
 | `/scene` | Switch scene | Pick the scene the agent runs under (`/scene <name>`) |
 | `/variant` | Select variant | Pick the model's reasoning effort (`/variant HIGH`) |
 | `/theme` | Theme | Pick the TUI theme, with live previews (`/theme <name>`) |
+| `/peak-table` | Peak periods | Show the model's peak/off-peak windows; `t` switches timezone |
+| `/codemode` | Codemode | Offer the Rhai scripting tool, and how it presents the roster |
 | `/title` | Edit title | Rename the current session (`/title My title`) |
 | `/gen-title` | Generate title | Draft the session title with the LLM |
 | `/export` | Export session | Write the session to a JSON file (optional path) |
@@ -38,7 +40,9 @@ Some commands only appear when they apply: `/undo` and `/replay` need
 messages in the chat; `/compact` needs messages and no reply streaming;
 `/tree`, `/title`, `/gen-title` and `/export` need an active session
 (`/gen-title` also needs a first prompt); `/scene` is hidden while a reply
-is streaming; and `/images` appears once the session has images.
+is streaming; `/images` appears once the session has images; and
+`/peak-table` needs a model whose catalog entry bills on a peak/off-peak
+schedule.
 
 `/todo` opens a read-only popup of the list the agent keeps for the session
 with its `todo` tool (see [Tools](/docs/configuration/tools/#todo)); running
@@ -47,6 +51,19 @@ the list, <kbd>Home</kbd>/`g` and <kbd>End</kbd>/`G` jump to the ends, and
 <kbd>Esc</kbd> or `q` closes it. `/screensaver` plays the onboarding
 animation fullscreen over a live session until a key is pressed
 (<kbd>Ctrl+C</kbd> still asks to quit).
+
+`/peak-table` lists the active model's peak windows for the day — and the
+exempt day classes the schedule skips — in the schedule's own timezone, UTC
+or your local time; `t` cycles the clock, <kbd>Esc</kbd> or `q` closes it.
+Typing it for a model without a schedule says so instead of opening an empty
+table.
+
+`/codemode` opens the overlay that edits the three switches worth changing
+mid-session — **Offered** (`on`, `auto`, `off`), **Roster** (`declared`,
+`declare-builtin`, `only`) and **Keep state** — and reports the limits a
+script runs under; a change is written back to your config file. The limits
+themselves (timeout, operation and call caps, inline budget) stay in
+`shuvarie.kdl` — see [Codemode](/docs/configuration/codemode/).
 
 <kbd>Ctrl+M</kbd> opens the same commands as a searchable menu.
 
@@ -57,7 +74,7 @@ Commands are also plain files: a directory holding a `command.md` under
 directory) becomes a slash command named after the directory. The optional
 YAML frontmatter overrides the menu `title` and the `model`
 (`<provider>/<model>`) used for the turn; the body is the prompt template,
-and `{{arguments}}` is replaced by whatever was typed after the command
+and `{% raw %}{{arguments}}{% endraw %}` is replaced by whatever was typed after the command
 name (the raw arguments are appended after a blank line when the
 placeholder is missing):
 
@@ -67,7 +84,7 @@ title: Commit code
 model: anthropic/claude-x
 ---
 
-Commit {{arguments}} with conventional commits.
+Commit {% raw %}{{arguments}}{% endraw %} with conventional commits.
 ```
 
 A `model:` that names a provider **kind** (`anthropic/…`) resolves through

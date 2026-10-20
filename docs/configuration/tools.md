@@ -48,7 +48,7 @@ like any other.
 ## Custom stdio tools
 
 `tool name="…"` defines your own tool: every call spawns a fresh process
-running `cmd`, with `{{param}}` placeholders in the argv replaced by the
+running `cmd`, with `{% raw %}{{param}}{% endraw %}` placeholders in the argv replaced by the
 call's arguments. The `params` you declare form the tool's JSON input
 schema; `input "json"` additionally pipes the resolved arguments to the
 child's stdin; `envs` (values may expand `$VAR`) and `timeout` (seconds, at
@@ -58,7 +58,7 @@ least 1) round it off. Names starting with `mcp__` are reserved:
 tools {
     tool name="deploy" {
         description "Deploy the current branch"
-        cmd "./scripts/deploy.sh" "{{target}}"
+        cmd "./scripts/deploy.sh" "{% raw %}{{target}}{% endraw %}"
         params {
             param "target" type="string" required=#true description="Where to deploy"
         }
@@ -97,6 +97,12 @@ see [permissions](/docs/configuration/permissions/)).
 [`/mcp`](/docs/usage/commands/) lists server states,
 `/mcp-reconnect <server>` reconnects one, and the sidebar marks each server
 ✓ / ○ / ✗.
+
+Every tool on this page is also reachable from a script: with
+[codemode](/docs/configuration/codemode/) on (the default) configured
+`tool` entries and MCP tools leave the model's roster and are called from
+Rhai instead (`mcp::<server>::<tool>`), which is what keeps a large MCP
+roster out of the context window.
 
 ## shell
 

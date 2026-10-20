@@ -32,12 +32,21 @@ decision — all under explicit, granular permissions you control.
   <div class="feature">
     <h3>🔌 Bring your own model</h3>
     <p>OpenAI-compatible, Anthropic, Ollama and more — configured in one
-    <code>connections.kdl</code>, switchable on the fly with <code>/model</code>.</p>
+    <code>connections.kdl</code>, switchable on the fly with <code>/model</code>.
+    A peak/off-peak countdown follows whichever model bills by time of day.</p>
+  </div>
+  <div class="feature">
+    <h3>📜 Codemode</h3>
+    <p>One tool that runs a Rhai script, and the script calls the others:
+    dependent calls become one round trip and intermediate results never
+    reach the context. On by default, with a <code>/codemode</code> roster
+    switch.</p>
   </div>
   <div class="feature">
     <h3>🌲 Sessions &amp; forking</h3>
     <p>Every session is a tree. Inspect it with <code>/tree</code>, roll back
-    with <code>/undo</code>, replay, and export or import sessions as JSON.</p>
+    with <code>/undo</code>, replay, and export or import sessions as JSON.
+    A failed or interrupted turn resumes where it stopped.</p>
   </div>
   <div class="feature">
     <h3>🧩 Skills</h3>

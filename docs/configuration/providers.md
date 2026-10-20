@@ -2,7 +2,7 @@
 layout: page
 title: Providers & models
 parent: Configuration
-nav_order: 7
+nav_order: 8
 permalink: /docs/configuration/providers/
 ---
 
@@ -119,6 +119,23 @@ registries {
 ```
 
 `registries` merges key-by-key across config layers.
+
+## Peak/off-peak schedules
+
+Some providers bill a model at a higher rate inside fixed windows of the day.
+Those windows come from the catalog, not from your config: a provider (or a
+single model of it) declares its periods, the timezone they are stated in
+(default UTC) and, optionally, the day classes they skip (`weekends`,
+`holidays-us`, …) — DeepSeek's `09:00–12:00` and `14:00–18:00`
+`Asia/Shanghai`, for example. A model's own schedule overrides the
+provider-wide one.
+
+When the active model has a schedule, the sidebar's context panel carries a
+live countdown to the end of the current phase — `Peak ends in 2h` in red,
+`Off-Peak ends in 1d 4h` in green — and
+[`/peak-table`](/docs/usage/commands/) lists the day's windows (and the
+exempt day classes) in the schedule's zone, UTC or your machine's local time,
+with `t` cycling the clock. A model without a schedule shows neither.
 
 ## embedding
 

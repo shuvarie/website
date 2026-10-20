@@ -2,7 +2,7 @@
 layout: page
 title: Decisions
 parent: Configuration
-nav_order: 10
+nav_order: 11
 permalink: /docs/configuration/decisions/
 ---
 

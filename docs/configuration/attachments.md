@@ -2,7 +2,7 @@
 layout: page
 title: Attachments
 parent: Configuration
-nav_order: 6
+nav_order: 7
 permalink: /docs/configuration/attachments/
 ---
 
