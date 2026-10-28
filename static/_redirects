@@ -1,0 +1,25 @@
+# The site it replaces ran on Jekyll, which emits directory-style URLs with a
+# trailing slash. Those paths are still linked from around the web (and search
+# results), so send them to the canonical, slash-free URL with a permanent
+# redirect. New pages do not need an entry here.
+/docs/                          /docs                         301
+/docs/install/                  /docs/install                 301
+/docs/usage/                    /docs/usage                   301
+/docs/usage/cli/                /docs/usage/cli               301
+/docs/usage/commands/           /docs/usage/commands          301
+/docs/usage/keybindings/        /docs/usage/keybindings       301
+/docs/usage/sessions/           /docs/usage/sessions          301
+/docs/usage/trust/              /docs/usage/trust             301
+/docs/configuration/            /docs/configuration           301
+/docs/configuration/files/      /docs/configuration/files     301
+/docs/configuration/ui/         /docs/configuration/ui        301
+/docs/configuration/agent/      /docs/configuration/agent     301
+/docs/configuration/skills/     /docs/configuration/skills    301
+/docs/configuration/tools/      /docs/configuration/tools     301
+/docs/configuration/codemode/   /docs/configuration/codemode  301
+/docs/configuration/attachments/ /docs/configuration/attachments 301
+/docs/configuration/providers/  /docs/configuration/providers 301
+/docs/configuration/scenes/     /docs/configuration/scenes    301
+/docs/configuration/permissions/ /docs/configuration/permissions 301
+/docs/configuration/decisions/  /docs/configuration/decisions 301
+/about/                         /about                        301
