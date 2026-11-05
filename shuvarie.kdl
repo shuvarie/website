@@ -1,7 +1,7 @@
 permissions {
   paths {
     allow ".gitignore" ".gitattributes" ".gitmodules"
-    allow ".jekyll-cache"
+    allow ".svelte-kit"
     allow ".agents/"
     allow "ref/"
   }
