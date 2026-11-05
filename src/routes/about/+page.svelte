@@ -19,7 +19,7 @@
 	<div class="relative mx-auto w-full max-w-3xl px-5 pt-14 pb-10 sm:px-8">
 		<p class="font-mono text-2xs tracking-[0.18em] text-gold/80 uppercase">// about</p>
 		<h1 class="mt-3 font-mono text-2xl font-semibold tracking-tight text-chalk sm:text-3xl">
-			⚔ シュヴァリエ
+			⚔️ シュヴァリエ
 		</h1>
 		<p class="mt-2 font-mono text-xs text-fog">
 			chevalier, n. — a knight; one who rides by a code.
