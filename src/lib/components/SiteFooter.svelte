@@ -15,9 +15,6 @@
 				<p class="mt-3 max-w-xs text-[13px] leading-relaxed text-fog">
 					An agentic AI pair-programmer that lives in your terminal — for chivalrous people.
 				</p>
-				<p class="mt-5 font-mono text-2xs tracking-[0.18em] text-fog-dim uppercase">
-					rust · tui · kdl · mit
-				</p>
 			</div>
 
 			<nav class="flex flex-col gap-2 font-mono text-xs">
@@ -54,7 +51,7 @@
 				<span class="text-fog">白き騎士</span> / コードの闇へ / 光差す
 				<span class="ml-1 opacity-60">— moonshotai/Kimi-K2.6</span>
 			</p>
-			<p class="font-mono">© {year} Charles Dong · MIT</p>
+			<p class="font-mono">© {year} Charles Dong</p>
 		</div>
 	</div>
 </footer>

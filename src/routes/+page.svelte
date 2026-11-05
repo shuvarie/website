@@ -75,13 +75,13 @@
 		class="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-gold/[0.07] blur-[120px]"
 	></div>
 
-	<div class="relative mx-auto w-full max-w-6xl px-5 pt-14 pb-16 sm:px-8 lg:pt-20 lg:pb-24">
-		<div class="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
-			<div class="fade-in">
+	<div class="relative mx-auto w-full max-w-6xl px-5 pt-14 pb-14 sm:px-8 lg:pt-20 lg:pb-16">
+		<div class="fade-in grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-end lg:gap-14">
+			<div>
 				<p class="flex flex-wrap items-center gap-2 font-mono text-2xs tracking-[0.16em] uppercase">
-					<span class="text-gold">⚔ シュヴァリエ</span>
+					<span class="text-gold">⚔️ シュヴァリエ</span>
 					<span class="text-line-bright">|</span>
-					<span class="text-fog-dim">open source · rust · mit</span>
+					<span class="text-fog-dim">Shuvarie</span>
 				</p>
 
 				<h1
@@ -90,13 +90,15 @@
 					The AI coding agent<br />
 					for <span class="text-gold">chivalrous people</span>.
 				</h1>
+			</div>
 
-				<p class="mt-5 max-w-md text-[15px] leading-relaxed text-fog">
+			<div class="lg:pb-1">
+				<p class="max-w-md text-[15px] leading-relaxed text-fog">
 					Shuvarie lives in your terminal. It reads your code, edits files, runs tools and keeps a
 					forkable history of every decision — all under explicit, granular permissions you control.
 				</p>
 
-				<div class="mt-7 flex flex-wrap items-center gap-3">
+				<div class="mt-6 flex flex-wrap items-center gap-3">
 					<a
 						href="/docs/install"
 						class="group inline-flex h-10 items-center gap-2 border border-gold/70 bg-gold px-4 font-mono text-xs font-medium text-void transition-colors hover:bg-gold-soft"
@@ -112,14 +114,15 @@
 					</a>
 				</div>
 
-				<div class="mt-6 max-w-md">
+				<div class="mt-5 max-w-md">
 					<CopyCommand command="nix run github:shuvarie/shuvarie" />
 				</div>
 			</div>
+		</div>
 
-			<div class="fade-in lg:-mr-6">
-				<Terminal />
-			</div>
+		<!-- the recording is 225 columns wide, so it gets the full measure -->
+		<div class="fade-in mt-11 lg:mt-14">
+			<Terminal />
 		</div>
 	</div>
 </section>
