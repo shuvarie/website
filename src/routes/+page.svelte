@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CopyCommand from '#lib/components/CopyCommand.svelte';
+	import DownloadButton from '#lib/components/DownloadButton.svelte';
 	import Terminal from '#lib/components/Terminal.svelte';
 
 	const features = [
@@ -76,7 +77,12 @@
 	></div>
 
 	<div class="relative mx-auto w-full max-w-6xl px-5 pt-14 pb-14 sm:px-8 lg:pt-20 lg:pb-16">
-		<div class="fade-in grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-end lg:gap-14">
+		<!-- `z-10` keeps the download menu above the terminal panel: the fade-in
+		     animation creates a stacking context here, so the button's own
+		     `z-50` could not outrank the (later, also `fade-in`) terminal block. -->
+		<div
+			class="fade-in relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-end lg:gap-14"
+		>
 			<div>
 				<p class="flex flex-wrap items-center gap-2 font-mono text-2xs tracking-[0.16em] uppercase">
 					<span class="text-gold">⚔️ シュヴァリエ</span>
@@ -99,23 +105,21 @@
 				</p>
 
 				<div class="mt-6 flex flex-wrap items-center gap-3">
+					<DownloadButton class="w-full sm:w-auto" />
+
 					<a
 						href="/docs/install"
-						class="group inline-flex h-10 items-center gap-2 border border-gold/70 bg-gold px-4 font-mono text-xs font-medium text-void transition-colors hover:bg-gold-soft"
+						class="group inline-flex h-11 items-center gap-2 border border-gold/40 bg-panel px-4 font-mono text-xs text-gold-soft transition-colors hover:border-gold/70 hover:bg-gold/10"
 					>
 						install
 						<span class="transition-transform group-hover:translate-x-0.5">→</span>
 					</a>
 					<a
 						href="/docs"
-						class="inline-flex h-10 items-center gap-2 border border-line-bright bg-panel px-4 font-mono text-xs text-chalk transition-colors hover:border-gold/40 hover:bg-panel-2"
+						class="inline-flex h-11 items-center gap-2 border border-line-bright bg-panel px-4 font-mono text-xs text-chalk transition-colors hover:border-gold/40 hover:bg-panel-2"
 					>
 						read the docs
 					</a>
-				</div>
-
-				<div class="mt-5 max-w-md">
-					<CopyCommand command="nix run github:shuvarie/shuvarie" />
 				</div>
 			</div>
 		</div>
