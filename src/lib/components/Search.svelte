@@ -3,6 +3,19 @@
 
 	type Entry = { slug: string; title: string; group: string; text: string };
 
+	// The dialog is teleported to <body>. Rendered in place it sits inside the
+	// docs sidebar, whose `position: sticky` creates a stacking context, so the
+	// overlay's `z-50` could never outrank the sticky TOC and the prose painted
+	// after it — the article text showed on top of the backdrop.
+	function portal(node: HTMLElement) {
+		document.body.appendChild(node);
+		return {
+			destroy() {
+				node.remove();
+			}
+		};
+	}
+
 	let open = $state(false);
 	let query = $state('');
 	let entries = $state<Entry[]>([]);
@@ -115,6 +128,7 @@
 
 {#if open}
 	<div
+		use:portal
 		class="fixed inset-0 z-50 flex items-start justify-center bg-void/80 px-4 pt-[12vh] backdrop-blur-sm"
 		role="presentation"
 		onclick={(event) => event.target === event.currentTarget && hide()}
