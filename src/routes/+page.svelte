@@ -17,6 +17,10 @@
 			body: 'Every session is a tree. Inspect it with /tree, roll back with /undo, replay a turn, and export or import the whole thing as JSON.'
 		},
 		{
+			title: 'Tabs',
+			body: 'A tab is a separate agent: its own workspace, conversation and composer. /newtab ~/another-project runs a second one there, Alt+←/→ switch, Alt+1…9 jump.'
+		},
+		{
 			title: 'Skills',
 			body: 'Reusable prompts and procedures stored as markdown, discovered from .agents/skills and invoked straight from the prompt as /skill:<name>.'
 		},
@@ -26,7 +30,7 @@
 		},
 		{
 			title: 'Attachments',
-			body: 'Type @path to attach PDFs, office documents, spreadsheets, EPUBs or images. The model reads them through read_file, images as multimodal parts.'
+			body: '/attach fuzzy-finds a PDF, office document, spreadsheet, EPUB or image to send with the prompt — as a chip on the pending strip, never as text. /manage-attachments reorders and prunes them.'
 		},
 		{
 			title: 'Permissions & trust',
@@ -51,7 +55,7 @@
 		{
 			href: '/docs/usage',
 			label: 'Usage',
-			body: 'The prompt, slash commands, keybindings, sessions and workspace trust.'
+			body: 'The prompt, slash commands, keybindings, sessions, tabs and workspace trust.'
 		},
 		{
 			href: '/docs/configuration',

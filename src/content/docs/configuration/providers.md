@@ -26,6 +26,7 @@ providers {
         kind "openai"           // transport, see below
         catalog "ollama-cloud"  // optional: catalog id for model metadata
         api-key "sk-..."        // required unless local or OAuth (chatgpt, copilot)
+        // api-key-env "OPENAI_API_KEY"   // alternative: read the key from the environment
         base-url "https://..."  // optional: overrides the catalog endpoint
     }
 }
@@ -46,6 +47,15 @@ Notes:
   disk and refreshed automatically. Other kinds must configure an API key.
 - `api-key` and `base-url` values expand `$VAR` / `${VAR}` from the
   environment.
+- `api-key-env` keeps the secret out of the file: it names an environment
+  variable, read when the connection is opened. Both spellings work —
+  `api-key-env "OPENAI_API_KEY"` and the Selune-style
+  `api-key-env "$OPENAI_API_KEY"` — and the sigil is stripped when the file is
+  written. A literal `api-key` wins over the variable, and a blank `api-key`
+  does not shadow it. The add-provider wizard offers the same bargain:
+  <kbd>Alt</kbd>+<kbd>E</kbd> over the API key row flips it to the variable
+  Selune names for that provider — but only while that variable actually holds
+  a value, since a source that cannot resolve would only mislead.
 
 ## decision-providers
 

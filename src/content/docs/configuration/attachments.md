@@ -1,17 +1,31 @@
 ---
 title: Attachments
-description: "Attach documents and images with `@path`; conversion and limits."
+description: "Attach documents and images with `/attach`; conversion and limits."
 group: Configuration
 order: 7
 ---
 
-Type `@path` in the composer to attach a file to the prompt. Shuvarie reads
-it, sniffs its type and either converts it to markdown (documents) or sends
-it as multimodal content (images). An `@`-mention popup completes paths as
-you type, dragging a file onto the terminal drops its path into the
-composer, and images can be pasted straight off the system clipboard with
-<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> (or
-<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>).
+Attachments are **structural**, not text: what you pick is a chip on the
+composer's pending strip, and it rides the next prompt without a mention ever
+appearing in the buffer. The finder is
+[`/attach [dir]`](/docs/usage/commands) — a fuzzy popup over the workspace (or
+over the directory you named) where typing narrows the list,
+<kbd>Enter</kbd>/<kbd>Tab</kbd> attaches the highlighted file, and
+<kbd>Ctrl+D</kbd> changes the directory being searched without closing the
+dialog. [`/manage-attachments`](/docs/usage/commands) then edits the strip as
+one list: add another file through the same finder, reorder what will be sent,
+remove what will not.
+
+Two more ways in:
+
+- **Dropping a file** on the terminal turns the path the terminal types into an
+  attachment.
+- **<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>** (or
+  <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>) pastes an image straight off
+  the system clipboard.
+
+Shuvarie reads each file, sniffs its type and either converts it to markdown
+(documents) or sends it as multimodal content (images).
 
 ## Supported formats
 
@@ -54,6 +68,16 @@ Windows). Pasted images are staged to a temp file under the same size and
 edge limits as any other image, then enter the ordinary attachment pipeline.
 Over SSH the clipboard lives on the client, so name a command that ferries
 it in.
+
+## When a drop does nothing
+
+A dragged file reaches the program only as far as the terminal is willing to
+send it, and terminals disagree: some paste the path quoted or
+backslash-escaped, some percent-encode it, some (kitty 0.47+) deliver nothing
+at all. Set `SHUVARIE_TRACE_INPUT=1` (or a file path) to log every raw input
+event — paste payloads and keys — to `$TMPDIR/shuvarie-input-trace.log`, which
+shows what *your* terminal actually sends. `Ctrl+Shift+V` is the fallback that
+does not depend on the terminal at all.
 
 ## ui.image
 

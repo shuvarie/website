@@ -17,6 +17,18 @@ order: 3
 | <kbd>Ctrl+W</kbd> | Toggle the sidebar |
 | <kbd>Ctrl+Shift+V</kbd> | Paste an image off the system clipboard as an attachment (also <kbd>Alt+Shift+V</kbd>) |
 
+## Tabs
+
+| Key | Action |
+| ----- | -------- |
+| <kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>Alt</kbd>+<kbd>→</kbd> | Previous / next tab, wrapping at the ends |
+| <kbd>Alt</kbd>+<kbd>1</kbd> … <kbd>Alt</kbd>+<kbd>9</kbd> | Jump to that position in the strip |
+
+Both are bound only while there is more than one tab, so a single-tab session
+keeps every chord the composer had before tabs existed — including
+<kbd>Alt</kbd>+<kbd>←</kbd>/<kbd>→</kbd>, which then still move by word. See
+[Tabs](/docs/usage/tabs).
+
 ## Editing
 
 Standard Emacs keys in the input box: <kbd>Ctrl+B</kbd>/<kbd>F</kbd> move by
@@ -66,8 +78,10 @@ only one of the two shows just that one, and imported or older turns may
 show none.
 
 A turn's end is also announced if you asked for it: Shuvarie sends a desktop
-notification through the terminal (OSC 9) by default, and can play a sound —
-see [`ui.notify`](/docs/configuration/ui#notify).
+notification through the terminal (OSC 9) by default, and can play a sound.
+So do the two prompts that park the turn on you — a permission ask and a
+question — which is the point of the notification when you have stepped away.
+See [`ui.notify`](/docs/configuration/ui#notify).
 
 ## Popups
 
@@ -78,10 +92,14 @@ see [`ui.notify`](/docs/configuration/ui#notify).
 | Todo list | <kbd>↑</kbd>/<kbd>↓</kbd> or `j`/`k` move, <kbd>Home</kbd>/`g` and <kbd>End</kbd>/`G` jump to the ends, <kbd>Esc</kbd>/`q` close |
 | Peak table | `t` switch the time columns between the schedule's zone, UTC and local time, <kbd>Esc</kbd>/`q` close |
 | Codemode overlay | <kbd>↑</kbd>/<kbd>↓</kbd> (<kbd>Ctrl+P</kbd>/<kbd>Ctrl+N</kbd>) walk, <kbd>Enter</kbd>/<kbd>Space</kbd> change a switch, <kbd>Esc</kbd> close |
+| Session picker | Type to filter titles (fuzzy, from the first keystroke), <kbd>↑</kbd>/<kbd>↓</kbd> (<kbd>Ctrl+P</kbd>/<kbd>Ctrl+N</kbd>) move, <kbd>Enter</kbd> resume, <kbd>Ctrl+D</kbd> delete then <kbd>Ctrl+D</kbd> again to confirm, <kbd>Ctrl+O</kbd> new session, <kbd>Esc</kbd> close |
+| Attach finder | Type to filter files (fuzzy), <kbd>↑</kbd>/<kbd>↓</kbd> move, <kbd>Enter</kbd>/<kbd>Tab</kbd> attach, <kbd>Ctrl+U</kbd> clear the query, <kbd>Ctrl+D</kbd> change the directory searched, <kbd>Esc</kbd>/<kbd>Ctrl+C</kbd> close |
+| Directory prompt | Edit the search root (`~`, relative or absolute), <kbd>Tab</kbd> complete the highlighted hint, <kbd>↑</kbd>/<kbd>↓</kbd> pick a hint, <kbd>Enter</kbd> search there, <kbd>Esc</kbd> back to the finder |
+| Manage attachments | <kbd>↑</kbd>/<kbd>↓</kbd> move, `a` or <kbd>Ctrl+A</kbd> add through the finder, <kbd>Delete</kbd>/<kbd>Ctrl+X</kbd> remove, <kbd>Ctrl+↑</kbd>/<kbd>↓</kbd> (<kbd>Alt+K</kbd>/<kbd>Alt+J</kbd>) change the send order, <kbd>Home</kbd>/<kbd>End</kbd> jump, <kbd>Enter</kbd>/<kbd>Esc</kbd>/`q` close |
+| Unstaged changes | `s` stage everything and send, `c` send anyway, <kbd>Esc</kbd> cancel and give the draft back |
 | Invalid slash command | <kbd>Enter</kbd> send the held text anyway, <kbd>Esc</kbd> hand it back to the composer |
 | Command menu | <kbd>↑</kbd>/<kbd>↓</kbd> navigate, <kbd>Enter</kbd> run, <kbd>Esc</kbd> close |
 | Slash-command menu | <kbd>Tab</kbd> complete, <kbd>↑</kbd>/<kbd>↓</kbd> select, <kbd>Enter</kbd> run, <kbd>Esc</kbd> dismiss |
-| `@`-mention completion | <kbd>Tab</kbd>/<kbd>Enter</kbd> accept, <kbd>↑</kbd>/<kbd>↓</kbd> move, <kbd>Esc</kbd> dismiss |
 | Image viewer | <kbd>←</kbd>/<kbd>h</kbd> and <kbd>→</kbd>/<kbd>l</kbd> step, <kbd>Esc</kbd>/<kbd>q</kbd> close |
 
 ## Mouse

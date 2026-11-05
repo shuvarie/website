@@ -81,10 +81,30 @@ restart `shuvarie` to use the new version.
   editing.
 - `/skill:<name> [args]` expands a
   [skill](/docs/configuration/skills) into its stored prompt and sends it.
-- Type `@path` to attach a document or image (see
-  [Attachments](/docs/configuration/attachments)); a completion popup
-  offers matching paths as you type. A file dragged onto the terminal
-  arrives as the same `@path` mention, and
-  <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> (or
+- [`/attach [dir]`](/docs/usage/commands) fuzzy-finds a file and attaches it
+  to the next prompt: documents are converted, images ride along as multimodal
+  parts (see [Attachments](/docs/configuration/attachments)). What you picked
+  shows above the input as a **pending strip** — attachments are structural,
+  never text in the composer — and [`/manage-attachments`](/docs/usage/commands)
+  adds, reorders and removes them. A file dragged onto the terminal arrives as
+  an attachment too, and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> (or
   <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>) pastes an image straight off
   the system clipboard.
+
+## Unstaged changes
+
+In a git worktree with work that is not staged, a submitted prompt is **held**
+and the worktree is reported first — the turn would otherwise run against
+uncommitted work:
+
+| Key | Action |
+| ----- | -------- |
+| `s` | Run `git add --all`, then send |
+| `c` | Send anyway, leaving the worktree alone |
+| <kbd>Esc</kbd> | Cancel: the draft goes back to the composer |
+
+Only the unstaged half of `git status` is listed (tracked files whose worktree
+copy changed or vanished, plus untracked paths), so work you already staged is
+not what the prompt is about. It never fires mid-turn — while the agent is busy
+a submit steers it instead — and a workspace that is not a git worktree has
+nothing to warn about.

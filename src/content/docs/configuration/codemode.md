@@ -48,7 +48,8 @@ model also sees directly.
 | `only` | `codemode` alone | every tool |
 
 `declare-builtin` is the split that pays for itself: the built-ins are few
-and stable (`read_file`, `edit_file`, `grep`, `run_shell`, …), while a
+and stable (`read_file`, `edit_file`, `grep`, `file_search`, `run_shell`, …),
+while a
 connected MCP server or a pile of configured `tool` subprocesses is where
 the roster bloats into dozens of schemas the model rarely calls — and where
 a typed call in a script reads better than one schema per tool. The catalog

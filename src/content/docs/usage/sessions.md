@@ -14,9 +14,14 @@ created by your first prompt — titled from it — and every message, tool
 call and scroll position is persisted immediately, so killing the terminal
 loses nothing.
 
-- **Resume** with `shuvarie -c`, `shuvarie -s <UUID>`, or `/sessions`
-  (<kbd>Enter</kbd> resume, <kbd>N</kbd> new, <kbd>Ctrl+D</kbd> delete with
-  confirmation).
+- **Resume** with `shuvarie -c`, `shuvarie -s <UUID>`, or `/sessions`,
+  where the query row takes the first keystroke: typing filters titles
+  (fuzzy, best match first), <kbd>↑</kbd>/<kbd>↓</kbd> move, <kbd>Enter</kbd>
+  resumes, <kbd>Ctrl+D</kbd> deletes (then again to confirm) and
+  <kbd>Ctrl+O</kbd> starts a new session without one to resume.
+- **Every tab has its own session.** A session belongs to the tab whose
+  workspace it lives in, and the picker lists the sessions of the workspace on
+  screen — see [Tabs](/docs/usage/tabs).
 - **Titles.** New sessions are titled from the first prompt. `/title`
   renames them, [`/gen-title`](/docs/usage/commands) drafts one with the
   LLM, and `ui { title { auto-gen } }` drafts automatically — see
@@ -30,11 +35,15 @@ loses nothing.
   prompt is not sent again as a new request, and the retried reply fills in
   the same turn. An interrupted turn (<kbd>Esc</kbd> <kbd>Esc</kbd>) keeps
   its partial reply and finished tool calls too, so resuming the session
-  carries on with the work that was done rather than from the prompt.
+  carries on with the work that was done rather than from the prompt. Quitting
+  mid-turn is the same: the turn is cut and what it produced is persisted
+  before the core shuts down.
 - **History is a tree.** `/undo` forks before the last prompt, `/replay`
   forks and re-runs it, and `/tree` walks the whole tree — <kbd>Enter</kbd>
-  forks from a node, `s` summarizes the forked-away prefix, `d` deletes a
-  branch (confirmed). Files on disk are never reverted.
+  forks from a node, `s` summarizes the forked-away prefix, `d` deletes the
+  selected row's subtree (confirmed) and the selection stays on its parent, so
+  deleting the row you are on rewinds the active path to where it branched
+  from. Files on disk are never reverted.
 - **Compaction.** When the input budget is exceeded, older history is
   summarized automatically; `/compact [instruction]` runs it on demand —
   see [Agent & context](/docs/configuration/agent).

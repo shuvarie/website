@@ -15,5 +15,7 @@ session; everything after that is keyboard-first.
 - [Keybindings](/docs/usage/keybindings) — global, editing, streaming and
   mouse controls
 - [Sessions](/docs/usage/sessions) — resume, fork, export and import
+- [Tabs](/docs/usage/tabs) — several agents at once, each in its own
+  workspace
 - [Workspace trust](/docs/usage/trust) — what Shuvarie may load from your
   workspace

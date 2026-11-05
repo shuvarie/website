@@ -7,9 +7,9 @@
  *
  * Asset names come from `.github/workflows/release.yml` in the product repo:
  *
- *   shuvarie-0.5.6-x86_64-unknown-linux-gnu.tar.gz
- *   shuvarie_0.5.6_amd64.deb
- *   shuvarie-setup-0.5.6-amd64.exe
+ *   shuvarie-0.6.0-x86_64-unknown-linux-gnu.tar.gz
+ *   shuvarie_0.6.0_amd64.deb
+ *   shuvarie-setup-0.6.0-amd64.exe
  *
  * They are parsed instead of hard-coded, so a package format added to a future
  * release shows up in the menu without a change here.
@@ -133,7 +133,7 @@ const NOISE = new Set([
 /**
  * Splits a release asset name into the parts the menu needs.
  *
- * `shuvarie-0.5.6-aarch64-unknown-linux-musl.tar.gz`
+ * `shuvarie-0.6.0-aarch64-unknown-linux-musl.tar.gz`
  *   → label `aarch64 musl`, format `tar.gz`, os `linux`
  */
 export function describeAsset(name: string, url: string, size: number): Asset {

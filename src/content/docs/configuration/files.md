@@ -22,6 +22,10 @@ Debug builds keep a parallel hall — `~/.config/shuvarie-dev/`,
 `./.shuvarie-dev/`, `shuvarie-dev.kdl` — that never shares with a release
 build.
 
+Each [tab](/docs/usage/tabs) opens the store for *its* workspace: with the
+global store that is one connection per tab, each tracking its own directory,
+while the shared `connections.kdl` and `ui` prefs stay the user's.
+
 ## Precedence
 
 For each top-level section, the highest layer that defines it wins wholesale

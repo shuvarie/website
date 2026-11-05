@@ -10,8 +10,12 @@ order: 2
 | `/model` | Select model | Pick the active model |
 | `/provider` | Add provider | Add a new LLM provider |
 | `/decision-provider` | Decision provider | Add or edit a decision-model connection |
+| `/attach` | Attach files | Fuzzy-find a file to attach; optional directory (`/attach <dir>`) |
+| `/manage-attachments` | Manage attachments | Add, reorder, or remove pending attachments |
 | `/sessions` | Switch session | Resume or delete past sessions |
 | `/new` | New session | Start a fresh conversation |
+| `/newtab` | New tab | Run another agent in its own workspace (`/newtab <path>`) |
+| `/closetab` | Close tab | Stop this tab's agent and close it |
 | `/tree` | Session tree | Walk the tree, fork from a node |
 | `/todo` | Todos | Show the session todo list in a read-only popup |
 | `/scene` | Switch scene | Pick the scene the agent runs under (`/scene <name>`) |
@@ -42,6 +46,14 @@ messages in the chat; `/compact` needs messages and no reply streaming;
 is streaming; `/images` appears once the session has images; and
 `/peak-table` needs a model whose catalog entry bills on a peak/off-peak
 schedule.
+
+`/attach` opens the attachment finder on the workspace (or on the directory you
+named) — see [Attachments](/docs/configuration/attachments). `/manage-attachments`
+opens one dialog over the composer's pending strip: `a` adds another file
+through the same finder, <kbd>Delete</kbd> (or <kbd>Ctrl</kbd>+<kbd>X</kbd>)
+removes the selected one, and <kbd>Ctrl</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd> shifts
+it in the send order. `/newtab [path]` and `/closetab` manage
+[tabs](/docs/usage/tabs); the last tab stays open — `/quit` exits.
 
 `/todo` opens a read-only popup of the list the agent keeps for the session
 with its `todo` tool (see [Tools](/docs/configuration/tools#todo)); running

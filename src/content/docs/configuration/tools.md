@@ -33,6 +33,28 @@ Default `params` when omitted: `ollama` ⇒ POST body with `query as="query"`;
 `read_file` reads documents and images too — see
 [Attachments](/docs/configuration/attachments) for the formats and limits.
 
+## Search tools
+
+The agent finds files four ways, and all of them go through
+[fff-search](https://crates.io/crates/fff-search):
+
+| Tool | Use it when |
+| ------ | ------------- |
+| `glob` | You already know the pattern (`*.rs`, `src/**/*.ts`) |
+| `grep` | You know the text (`path:line: content`, capped, Rust regex) |
+| `file_search` | You half-remember the name — fuzzy and typo-tolerant |
+| `list_dir` | You want one directory's entries, nothing more |
+
+All four resolve `path` against the workspace root, honour `.gitignore` inside
+repositories, and skip hidden files and directories (unless `path` names one
+explicitly). `file_search` additionally understands FFF's query constraints —
+`*.rs` or `type:rust` to narrow by extension, `src/` by path segment, `!test`
+to exclude, several words to match independently — and ranks a hit in the file
+name over the same word in a parent directory. Its fuzzy text needs at least
+two characters (a constraint alone is enough), and results are capped: 20 for
+`file_search`, 100 for `glob`, 200 matching lines for `grep`. Every call builds
+its own index, so a file created between two calls is seen by the second one.
+
 ## todo
 
 The `todo` tool is the agent's own scratchpad for a session: it adds,
@@ -128,4 +150,7 @@ lsp {
 ```
 
 All fields are optional; the server name is the language it serves.
-`lsp.servers` merges key-by-key across config layers.
+`lsp.servers` merges key-by-key across config layers. The tool itself takes
+`list` (running servers, or every configured one with `all #true`), `start`,
+`stop`, `restart` and `analyze`; the `list` filter is a fuzzy substring match
+against the server name and its language.

@@ -23,3 +23,8 @@ Decisions persist in `~/.config/shuvarie/trusts.kdl`. A trusted workspace
 loads silently on later runs, re-prompting only when *new* files show up in
 a category you hadn't granted. `shuvarie --config <file>` sidesteps the
 Configs category entirely.
+
+Opening a [tab](/docs/usage/tabs) never prompts: a key press must not yank the
+terminal into a dialog. The new workspace's recorded decision is used when it
+has one, and otherwise the tab inherits the grants the startup workspace was
+given.

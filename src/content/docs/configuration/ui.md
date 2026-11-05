@@ -56,8 +56,9 @@ ui {
 
 ## notify
 
-Inside `ui`. What Shuvarie does when an agent turn ends — a desktop
-notification sent through the terminal (OSC 9) and, optionally, a sound:
+Inside `ui`. What Shuvarie does when an agent turn ends, or stops to wait for
+you — a desktop notification sent through the terminal (OSC 9) and,
+optionally, a sound:
 
 ```kdl
 ui {
@@ -75,8 +76,15 @@ announces a completed turn as `Shuvarie — agent completed: <session title>`
 (or a failed one as `Shuvarie — agent error: …`) through the terminal's
 OSC 9 notification — the form iTerm2 introduced and kitty, Ghostty, WezTerm,
 foot, Konsole and Windows Terminal understand; a terminal without it simply
-ignores the sequence. Only a turn that ends notifies: a retry that is still
-being scheduled does not.
+ignores the sequence. A retry that is still being scheduled does not notify
+(the turn carries on by itself); everything that parks the turn on you does.
+Besides a completed turn, it announces a failed one
+(`Shuvarie — agent error: …`) and the two prompts that stop the turn until you
+answer — a permission ask and a question prompt — as
+`Shuvarie — waiting for permission: <description>` and
+`Shuvarie — waiting for an answer: <header>`. Those are exactly the moments a
+notification is worth having when you have stepped away; the status row alone
+cannot reach you.
 
 The sound is **off** by default and opted into with the `sound` switch;
 `sound-file` and `error-sound-file` only pick the files — they do not turn
@@ -85,7 +93,9 @@ desktop sound theme on Linux
 (`/usr/share/sounds/freedesktop/stereo/complete.oga`, and KDE's
 `ocean/stereo/dialog-error.oga` for failures), the `Glass` and `Basso`
 system alerts on macOS, and the Windows `notify` / `Critical Stop` wavs.
-Naming a file replaces its list rather than adding to it.
+Naming a file replaces its list rather than adding to it. `sound-file` is the
+one played for a completed turn and for both waiting prompts (they carry one
+attention sound); `error-sound-file` is for failures.
 
 Playback is strictly best-effort: the file is handed to whichever audio
 player the host has (`paplay`, `pw-play`, `ffplay` or `mpv` on Linux,
